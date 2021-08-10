@@ -9,6 +9,11 @@ access = read : [ * ], write : [ admin, power ]
 [eventtypes]
 export = system
 
+### TAGS
+
+[tags]
+export = system
+
 
 ### PROPS
 
@@ -21,11 +26,30 @@ export = system
 [transforms]
 export = system
 
+[datamodels/Smarthome]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = nobody
+version = 8.2.1
+modtime = 1628438536.884097800
+
+[models/Smarthome]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = nobody
+version = 8.2.1
+modtime = 1628438536.906670600
+
 
 ### LOOKUPS
 
 [lookups]
 export = system
+
+[lookups/app_dependencies.csv]
+owner = Nobody
+version = 8.1.3
+modtime = 1624909474.686360000
 
 
 ### VIEWSTATES: even normal users should be able to create shared viewstates
@@ -33,3 +57,9 @@ export = system
 [viewstates]
 access = read : [ * ], write : [ * ]
 export = system
+
+[macros/smarthome_indexes]
+export = system
+owner = nobody
+version = 8.2.1
+modtime = 1627378570.776319300

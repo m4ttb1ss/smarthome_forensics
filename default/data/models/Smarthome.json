@@ -1,0 +1,356 @@
+{
+    "modelName": "Smarthome",
+    "displayName": "Smarthome",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Smarthome",
+            "displayName": "Smarthome",
+            "parentName": "BaseEvent",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "message",
+                    "owner": "Smarthome",
+                    "type": "string",
+                    "fieldSearch": "message=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "message",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "source_entity_address",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "source_entity_address",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "2iytl95cx19",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(source_entity_address) OR source_entity_address==\"\",\"-\",source_entity_address)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "log_level",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "log_level",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "7z137e21ewa",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(log_level) OR log_level==\"\",\"-\",log_level)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "value",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "value",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "sz1oz4ekiy",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(value) OR value==\"\",\"Unknown\",value)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "module",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "module",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "udtbspgfclo",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(module) OR module==\"\",\"-\",module)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "property",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "property",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "gi2dj51ws5v",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(property) OR property==\"\",\"-\",property)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "log_source_tool",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "log_source_tool=*",
+                            "required": true,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "log_source_tool",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "1l0yezbikpq",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(log_source_tool) OR log_source_tool==\"\",sourcetype,log_source_tool)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "source_entity_name",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "source_entity_name",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "mdba8hfjn2h",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(source_entity_name) OR source_entity_name==\"\",\"-\",source_entity_name)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "source_entity_type",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "source_entity_type",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "b8dv6yvnbir",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(source_entity_type) OR source_entity_type==\"\",\"-\",source_entity_type)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "destination_entity_type",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "destination_entity_type",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "2po6veoleoj",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(destination_entity_type) OR destination_entity_type==\"\",\"-\",destination_entity_type)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "destination_entity_name",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "destination_entity_name",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "lmzafo3m54p",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(destination_entity_name) OR destination_entity_name==\"\",\"-\",destination_entity_name)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "destination_entity_address",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "destination_entity_address",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "873pdp2z9jd",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(destination_entity_address) OR destination_entity_address==\"\",\"-\",destination_entity_address)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "user",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "user",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "zl3voxcs16c",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(user) OR user==\"\",\"-\",user)"
+                }
+            ],
+            "constraints": [
+                {
+                    "search": "(`smarthome_indexes`) tag=smarthome",
+                    "owner": "Smarthome"
+                }
+            ],
+            "lineage": "Smarthome"
+        }
+    ],
+    "objectNameList": [
+        "Smarthome"
+    ]
+}

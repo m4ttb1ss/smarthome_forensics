@@ -1,0 +1,46 @@
+<form theme="dark">
+  <label>Search history</label>
+  <description>Here all commands issued can be listed for documentation purposes</description>
+  <fieldset submitButton="false">
+    <input type="time" token="tokTime" searchWhenChanged="true">
+      <label>Timeframe</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="text" token="tokSearch" searchWhenChanged="true">
+      <label>Search</label>
+      <default>*</default>
+    </input>
+    <input type="text" token="tokUser" searchWhenChanged="true">
+      <label>User</label>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Search history</title>
+      <table>
+        <search>
+          <query>index=_audit action=search search=* NOT user=splunk-system-user search="*$tokSearch$*" user="*$tokUser$*"
+| table _time, search user, roles
+| sort + _time</query>
+          <earliest>$tokTime.earliest$</earliest>
+          <latest>$tokTime.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">search?q=index%3D_audit%20action%3Dsearch%20search%3D*%20NOT%20user%3Dsplunk-system-user%20$click.name2$%3D%22$click.value2$%22%0A%7C%20table%20_time%2C%20search%20user%2C%20roles%0A%7C%20sort%20%2B%20_time&amp;earliest=$tokTime.earliest$&amp;latest=$tokTime.latest$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

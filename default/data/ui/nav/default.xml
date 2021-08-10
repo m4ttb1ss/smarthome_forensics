@@ -1,8 +1,7 @@
 <nav search_view="search">
-  <view name="search" default='true' />
-  <view name="analytics_workspace" />
-  <view name="datasets" />
-  <view name="reports" />
-  <view name="alerts" />
+  <view name="search"  />
+  <view name="events" default='true'/>
+  <view name="search_history" />
+  <view name="config" />
   <view name="dashboards" />
 </nav>
