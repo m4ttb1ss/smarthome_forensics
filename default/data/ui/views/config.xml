@@ -1,0 +1,38 @@
+<dashboard theme="dark">
+  <label>App dependencies</label>
+  <description>This dashboards displays configuration information</description>
+  <row>
+    <panel>
+      <title>Additional apps</title>
+      <table>
+        <title>Installed, required and recommended apps. Click on a row to open the link to the addon or use the manage apps page.</title>
+        <search>
+          <query>| inputlookup app_dependencies 
+| rename app_name AS title
+| join type=outer title
+    [ | rest /services/apps/local 
+    | table title, label
+| stats values(label) AS label count by title]
+| eval is_installed = if(isnull(count),"false","true")
+| table label, title, is_required, is_installed, splunkbase_url</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="is_installed">
+          <colorPalette type="map">{"true":#53A051,"false":#DC4E41}</colorPalette>
+        </format>
+        <drilldown>
+          <link target="_blank">$row.splunkbase_url|n$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</dashboard>

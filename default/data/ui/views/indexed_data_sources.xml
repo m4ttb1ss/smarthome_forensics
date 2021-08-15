@@ -1,0 +1,49 @@
+<form theme="dark">
+  <label>Indexed data sources</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="tokInvestigationID" searchWhenChanged="true">
+      <label>Investigation ID</label>
+      <choice value="*">ALL</choice>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+      <search>
+        <query>| inputlookup investigation_ids
+| fields investigation_case_id
+| dedup investigation_case_id
+| sort + investigation_case_id</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>investigation_case_id</fieldForLabel>
+      <fieldForValue>investigation_case_id</fieldForValue>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Shows all data that was indexed until now</title>
+      <table>
+        <search>
+          <query>index=smarthome
+| eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S")
+| table indextime, sourcetype, source, host
+| dedup indextime, sourcetype, source, host
+| lookup investigation_ids source OUTPUT investigation_case_id, artifact_id, file_hash
+| search investigation_case_id = $tokInvestigationID$
+| table indextime, source, file_hash, host, sourcetype, artifact_id, investigation_case_id
+| sort - indextime
+| rename indextime AS "Time of indexing the data source"</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

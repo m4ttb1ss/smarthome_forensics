@@ -140,7 +140,7 @@
                     "editable": true,
                     "comment": "",
                     "calculationType": "Eval",
-                    "expression": "if(isnull(value) OR value==\"\",\"Unknown\",value)"
+                    "expression": "if(isnull(value) OR value==\"\",\"-\",value)"
                 },
                 {
                     "outputFields": [
@@ -339,6 +339,50 @@
                     "comment": "",
                     "calculationType": "Eval",
                     "expression": "if(isnull(user) OR user==\"\",\"-\",user)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "investigation_case_id",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "investigation_case_id",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "0rrsw5v4o2aj",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(investigation_case_id) OR investigation_case_id==\"\",\"-\",investigation_case_id)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "artifact_id",
+                            "owner": "Smarthome",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "artifact_id",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "nzz909psj0d",
+                    "owner": "Smarthome",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "if(isnull(artifact_id) OR artifact_id==\"\",\"-\",artifact_id)"
                 }
             ],
             "constraints": [

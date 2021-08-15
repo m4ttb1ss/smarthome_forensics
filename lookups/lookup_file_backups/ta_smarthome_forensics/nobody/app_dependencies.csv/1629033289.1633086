@@ -1,0 +1,2 @@
+app_name,is_required,splunkbase_url
+splunk_app_addon-builder,no,https://splunkbase.splunk.com/app/2962/

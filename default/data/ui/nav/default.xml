@@ -1,7 +1,9 @@
 <nav search_view="search">
   <view name="search"  />
-  <view name="events" default='true'/>
+  <view name="investigation" default='true'/>
   <view name="search_history" />
-  <view name="config" />
-  <view name="dashboards" />
+  <collection label="Config">     
+    <view name="indexed_data_sources" />
+    <view name="config" />
+  </collection>
 </nav>

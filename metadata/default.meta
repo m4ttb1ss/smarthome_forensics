@@ -1,6 +1,14 @@
 
 # Application-level permissions
 
+[app/ui]
+version = 8.1.3
+modtime = 1624563452.616657000
+
+[app/launcher]
+version = 8.1.3
+modtime = 1624563452.618789000
+
 []
 access = read : [ * ], write : [ admin, power ]
 
@@ -9,16 +17,63 @@ access = read : [ * ], write : [ admin, power ]
 [eventtypes]
 export = system
 
+[eventtypes/smarthome]
+version = 8.2.1
+modtime = 1628952012.102453000
+
 ### TAGS
 
 [tags]
 export = system
+
+[tags/eventtype%3Dsmarthome]
+version = 8.2.1
+modtime = 1628952012.181242000
+
+### Views 
+
+[views/config]
+version = 8.2.1
+modtime = 1629033469.771617700
+
+[views/app_config]
+owner = nobody
+version = 8.2.1
+modtime = 1624913120.823062000
+
+[views/investigation]
+owner = nobody
+version = 8.2.1
+modtime = 1627143132.335335000
+
+[views/search_history]
+owner = nobody
+version = 8.2.1
+modtime = 1628947098.176984000
+
+[views/indexed_data_sources]
+owner = mattbiss
+version = 8.2.1
+modtime = 1629054499.218377100
+
+
 
 
 ### PROPS
 
 [props]
 export = system
+
+[props/smarthomeng%3Alog]
+owner = nobody
+version = 8.2.1
+modtime = 1628090747.102935300
+
+[props/smarthomeng%3Alog/EXTRACT-time%2Clog_level%2Cmodule%2Cmessage]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1628090870.655034600
 
 
 ### TRANSFORMS
@@ -27,18 +82,12 @@ export = system
 export = system
 
 [datamodels/Smarthome]
-access = read : [ * ], write : [ admin, power ]
-export = system
-owner = nobody
 version = 8.2.1
-modtime = 1628438536.884097800
+modtime = 1629033918.193800600
 
 [models/Smarthome]
-access = read : [ * ], write : [ admin, power ]
-export = system
-owner = nobody
 version = 8.2.1
-modtime = 1628438536.906670600
+modtime = 1629033918.226710300
 
 
 ### LOOKUPS
@@ -47,9 +96,16 @@ modtime = 1628438536.906670600
 export = system
 
 [lookups/app_dependencies.csv]
-owner = Nobody
+owner = nobody
 version = 8.1.3
 modtime = 1624909474.686360000
+
+[lookups/investigation_ids.csv]
+owner = nobody
+version = 8.2.1
+modtime = 1629041763.603998200
+
+
 
 
 ### VIEWSTATES: even normal users should be able to create shared viewstates
@@ -63,3 +119,19 @@ export = system
 owner = nobody
 version = 8.2.1
 modtime = 1627378570.776319300
+
+[transforms/app_dependencies]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1628946119.050921200
+
+### Savedsearches
+
+[savedsearches/Sources%20to%20lookup%20file]
+access = read : [ * ], write : [ * ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1629041936.807682300
