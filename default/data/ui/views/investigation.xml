@@ -1,7 +1,7 @@
 <form script="run1_action.js" theme="dark">
   <label>Investigation</label>
   <description>This dashboard shows all events when the ingested data fullfil the requirements to be visible in the Smarthome datamodel.</description>
-  <fieldset submitButton="true" autoRun="false">
+  <fieldset submitButton="true" autoRun="true">
     <input type="time" token="tokTime" searchWhenChanged="true">
       <label>Time range</label>
       <default>
@@ -12,6 +12,8 @@
     <input type="text" token="tokMessage" searchWhenChanged="true">
       <label>Message</label>
       <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
     </input>
     <input type="multiselect" token="tokSourcetype" searchWhenChanged="true">
       <label>Sourcetype</label>
@@ -62,6 +64,8 @@
     <input type="text" token="tokUser" searchWhenChanged="true">
       <label>User</label>
       <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
     </input>
     <input type="dropdown" token="tokInvestigationID" searchWhenChanged="true">
       <label>Investigation case ID</label>
@@ -84,13 +88,62 @@
     <input type="text" token="tokLogLevel" searchWhenChanged="true">
       <label>Log Level</label>
       <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
     </input>
   </fieldset>
   <row>
     <panel>
-      <html>
-        <button class="btn btn-primary button1">Run search!</button>
-      </html>
+      <title>Events by time</title>
+      <chart>
+        <search>
+          <query>| from datamodel Smarthome 
+          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$
+          | lookup investigation_ids source OUTPUT investigation_case_id, artifact_id
+| search artifact_id IN ($tokArtifactID$) investigation_case_id=$tokInvestigationID$
+| timechart count</query>
+          <earliest>$tokTime.earliest$</earliest>
+          <latest>$tokTime.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="height">271</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <set token="tokTime.earliest">$earliest$</set>
+          <set token="tokTime.latest">$latest$</set>
+        </drilldown>
+      </chart>
     </panel>
   </row>
   <row>
@@ -99,7 +152,7 @@
       <table>
         <search>
           <query>| from datamodel Smarthome
-          | search sourcetype IN ($tokSourcetype$) user="*$tokUser$*" source IN ($tokSource$) host IN ($tokHost$) message="*$tokMessage$*" log_level="*$tokLogLevel$*"
+          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$
 | where NOT isnull(message)
 | lookup investigation_ids source OUTPUT investigation_case_id, artifact_id
 | search artifact_id IN ($tokArtifactID$) investigation_case_id=$tokInvestigationID$
@@ -110,7 +163,7 @@
           <latest>$tokTime.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
+        <option name="count">15</option>
         <option name="dataOverlayMode">none</option>
         <option name="drilldown">none</option>
         <option name="percentagesRow">false</option>
