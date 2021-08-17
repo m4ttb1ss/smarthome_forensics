@@ -2,8 +2,8 @@
   <view name="search"  />
   <view name="investigation" default='true'/>
   <view name="search_history" />
-  <collection label="Config">     
-    <view name="indexed_data_sources" />
+  <view name="indexed_data_sources" />
+  <collection label="Config">    
     <view name="config" />
   </collection>
 </nav>

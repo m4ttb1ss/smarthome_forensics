@@ -1,7 +1,9 @@
 <form script="run1_action.js" theme="dark">
   <label>Investigation</label>
-  <description>This dashboard shows all events when the ingested data fullfil the requirements to be visible in the Smarthome datamodel.</description>
+  <description>This dashboard shows all events when the ingested data fullfil the requirements to be visible in the Smarthome datamodel. Use the various filter inputs to tailor the data to your needs. Once finished you can export the data as they are either by using "Export -&gt; Export PDF" at the top right corner (this exports the whole dashboard as it is) or the export symbol at the bottom-right corner, which exports the data in the table as csv, json or xml on your choice.
+  </description>
   <fieldset submitButton="true" autoRun="true">
+    <html><hr></hr></html>
     <input type="time" token="tokTime" searchWhenChanged="true">
       <label>Time range</label>
       <default>
@@ -9,12 +11,9 @@
         <latest></latest>
       </default>
     </input>
-    <input type="text" token="tokMessage" searchWhenChanged="true">
-      <label>Message</label>
-      <default>*</default>
-      <prefix>"</prefix>
-      <suffix>"</suffix>
-    </input>
+    <html>
+      <row/>
+    </html>
     <input type="multiselect" token="tokSourcetype" searchWhenChanged="true">
       <label>Sourcetype</label>
       <default>*</default>
@@ -61,12 +60,6 @@
 | dedup host</query>
       </search>
     </input>
-    <input type="text" token="tokUser" searchWhenChanged="true">
-      <label>User</label>
-      <default>*</default>
-      <prefix>"</prefix>
-      <suffix>"</suffix>
-    </input>
     <input type="dropdown" token="tokInvestigationID" searchWhenChanged="true">
       <label>Investigation case ID</label>
       <default>*</default>
@@ -91,14 +84,91 @@
       <prefix>"</prefix>
       <suffix>"</suffix>
     </input>
+    <html>
+      <row/>
+    </html>
+    <input type="text" token="tokMessage" searchWhenChanged="true">
+      <label>Message</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokUser" searchWhenChanged="true">
+      <label>User</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="multiselect" token="tokModules" searchWhenChanged="true">
+      <label>Modules</label>
+      <choice value="*">ALL</choice>
+      <valuePrefix>"</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter>,</delimiter>
+      <fieldForLabel>module</fieldForLabel>
+      <fieldForValue>module</fieldForValue>
+      <search>
+        <query>| from datamodel Smarthome 
+| fields module
+| dedup module</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <default>*</default>
+    </input>
+    <input type="text" token="tokProperty" searchWhenChanged="true">
+      <label>Property</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <html>
+      <row/>
+    </html>
+    <input type="text" token="tokSourceEntityAddress" searchWhenChanged="true">
+      <label>Source entity address</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokSourceEntityName" searchWhenChanged="true">
+      <label>Source entity name</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokSourceEntityType" searchWhenChanged="true">
+      <label>Source entity value</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokDestinationEntityAddress" searchWhenChanged="true">
+      <label>Destination entity address</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokDestinationEntityName" searchWhenChanged="true">
+      <label>Destination entity name</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="tokDestinationEntityType" searchWhenChanged="true">
+      <label>Destination entity value</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
   </fieldset>
   <row>
     <panel>
       <title>Events by time</title>
       <chart>
         <search>
-          <query>| from datamodel Smarthome 
-          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$
+          <query>| from datamodel Smarthome  
+          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$ module IN ($tokModules$) property=$tokProperty$ source_entity_name=$tokSourceEntityName$ source_entity_address=$tokSourceEntityAddress$ source_entity_type=$tokSourceEntityType$ destination_entity_address=$tokDestinationEntityAddress$ destination_entity_name=$tokDestinationEntityName$ destination_entity_type=$tokSourceEntityType$
           | lookup investigation_ids source OUTPUT investigation_case_id, artifact_id
 | search artifact_id IN ($tokArtifactID$) investigation_case_id=$tokInvestigationID$
 | timechart count</query>
@@ -152,11 +222,11 @@
       <table>
         <search>
           <query>| from datamodel Smarthome
-          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$
+          | search sourcetype IN ($tokSourcetype$) user=$tokUser$ source IN ($tokSource$) host IN ($tokHost$) message=$tokMessage$ log_level=$tokLogLevel$ module IN ($tokModules$) property=$tokProperty$ source_entity_name=$tokSourceEntityName$ source_entity_address=$tokSourceEntityAddress$ source_entity_type=$tokSourceEntityType$ destination_entity_address=$tokDestinationEntityAddress$ destination_entity_name=$tokDestinationEntityName$ destination_entity_type=$tokSourceEntityType$
 | where NOT isnull(message)
 | lookup investigation_ids source OUTPUT investigation_case_id, artifact_id
 | search artifact_id IN ($tokArtifactID$) investigation_case_id=$tokInvestigationID$
-| eval Timestamp = strftime(_time, "%F %T")
+| eval Timestamp = strftime(_time, "%F %T %z")
 | table Timestamp, message, property, value, source_entity_*, destination_entity_*, module, user, log_level, host, source, sourcetype, investigation_case_id, artifact_id, log_source_tool
 | sort + Timestamp</query>
           <earliest>$tokTime.earliest$</earliest>

@@ -1,6 +1,8 @@
 <form theme="dark">
   <label>Indexed data sources</label>
+  <description>This dashboard shows all indexed data which are currently available in the indexes defined in the macro `smarthome_indexes`. Go to  "Settings -&gt; Advanced search -&gt; Macros", look for the macro `smarthome_indexes` and ensure that all indexes which contain Smarthome data are listed in this macro.</description>
   <fieldset submitButton="false">
+    <html><hr></hr></html>
     <input type="dropdown" token="tokInvestigationID" searchWhenChanged="true">
       <label>Investigation ID</label>
       <choice value="*">ALL</choice>
@@ -24,10 +26,9 @@
       <title>Shows all data that was indexed until now</title>
       <table>
         <search>
-          <query>index=smarthome
-| eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S")
-| table indextime, sourcetype, source, host
-| dedup indextime, sourcetype, source, host
+          <query>`smarthome_indexes`
+| eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S %z")
+| stats min(indextime) AS indextime by sourcetype, source, host
 | lookup investigation_ids source OUTPUT investigation_case_id, artifact_id, file_hash
 | search investigation_case_id = $tokInvestigationID$
 | table indextime, source, file_hash, host, sourcetype, artifact_id, investigation_case_id

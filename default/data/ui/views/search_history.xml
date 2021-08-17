@@ -1,7 +1,8 @@
 <form theme="dark">
   <label>Search history</label>
-  <description>Here all commands issued can be listed for documentation purposes</description>
+  <description>This dashboard shows a history of all commands which were generated and executed by filtering the data on the "Investigation" Dashboard. Click on "Export -&gt; Export PDF" or the "Export" symbol at the bottom right corner to export the filtered data.</description>
   <fieldset submitButton="true" autoRun="false">
+    <html><hr></hr></html>
     <input type="time" token="tokTime" searchWhenChanged="true">
       <label>Timeframe</label>
       <default>
@@ -17,20 +18,18 @@
       <label>User</label>
       <default>*</default>
     </input>
-    <input type="text" token="tokApp" searchWhenChanged="true">
-      <label>App</label>
-      <default>*</default>
-    </input>
   </fieldset>
   <row>
     <panel>
       <title>Search history</title>
       <table>
         <search>
-          <query>index=_audit action=search search=* NOT user=splunk-system-user search="*$tokSearch$*" user="*$tokUser$*" app="*$tokApp$*"
-          | where NOT match(search, "\*")
-| table _time, search user, roles, app
-| sort - _time</query>
+          <query>index=_audit action=search search=* NOT user=splunk-system-user app="ta_smarthome_forensics" NOT search_id IN ("*scheduler*") NOT search IN ("*_audit*") info=completed provenance="UI:Dashboard:investigation" search="'| from datamodel Smarthome
+          | search*" search="*$tokSearch$*" user="*$tokUser$*"
+          | where NOT match(search, "^\*$")
+| eval Time = strftime(_time, "%F %T %z")
+| table Time, search user, roles, app 
+| sort - Time</query>
           <earliest>$tokTime.earliest$</earliest>
           <latest>$tokTime.latest$</latest>
           <sampleRatio>1</sampleRatio>
