@@ -19,7 +19,7 @@ export = system
 
 [eventtypes/smarthome]
 version = 8.2.1
-modtime = 1629143139.189447000
+modtime = 1629318464.356795900
 
 ### TAGS
 
@@ -28,13 +28,10 @@ export = system
 
 [tags/eventtype%3Dsmarthome]
 version = 8.2.1
-modtime = 1629143139.246156200
+modtime = 1629318464.425609500
 
 ### Views 
 
-[views/config]
-version = 8.2.1
-modtime = 1629033469.771617700
 
 [views/app_config]
 owner = nobody
@@ -44,21 +41,22 @@ modtime = 1624913120.823062000
 [views/investigation]
 owner = nobody
 version = 8.2.1
-modtime = 1629144019.044191100
-
-[views/investigation]
-version = 8.2.1
-modtime = 1629144019.044191100
+modtime = 1629240465.041297400
 
 [views/search_history]
 owner = nobody
 version = 8.2.1
-modtime = 1628947098.176984000
+modtime = 1629240497.211138700
 
 [views/indexed_data_sources]
-owner = mattbiss
+owner = nobody
 version = 8.2.1
-modtime = 1629054499.218377100
+modtime = 1629240511.082408900
+
+[views/config]
+owner = nobody
+version = 8.2.1
+modtime = 1629240613.240335300
 
 ### PROPS
 
@@ -77,27 +75,53 @@ version = 8.2.1
 modtime = 1628090870.655034600
 
 [props/openhab%3Aevents]
-owner = mattbiss
+owner = nobody
 version = 8.2.1
 modtime = 1629138525.361645200
 
 [props/openhab%3Aevents/EXTRACT-module%2Cmessage]
 export = none
-owner = mattbiss
+owner = nobody
 version = 8.2.1
 modtime = 1629138647.500973200
 
 [props/openhab%3Alog]
-owner = mattbiss
+owner = nobody
 version = 8.2.1
 modtime = 1629142422.165078100
 
 [props/openhab%3Alog/EXTRACT-log_level%2Cmodule%2Cmessage]
 access = read : [ * ], write : [ * ]
 export = none
-owner = mattbiss
+owner = nobody
 version = 8.2.1
 modtime = 1629143073.631212600
+
+[props/homematic%3Accu2%3Asystemprotokoll]
+owner = nobody
+version = 8.2.1
+modtime = 1629318542.526734000
+
+[props/homematic%3Accu2%3Asystemprotokoll/FIELDALIAS-homematic_2_smarthome]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1629319522.968790200
+
+[props/homematic%3Accu2%3Asystemprotokoll/EVAL-value]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1629318014.720520200
+
+[props/homematic%3Accu2%3Asystemprotokoll/EVAL-message]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1629319536.674475200
 
 
 ### TRANSFORMS
@@ -127,7 +151,7 @@ modtime = 1624909474.686360000
 [lookups/investigation_ids.csv]
 owner = nobody
 version = 8.2.1
-modtime = 1629041763.603998200
+modtime = 1629319947.215758600
 
 
 

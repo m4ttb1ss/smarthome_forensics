@@ -1,6 +1,6 @@
 <dashboard theme="dark">
   <label>App dependencies</label>
-  <description>This dashboards displays configuration information</description>
+  <description>This dashboard show apps which are recemmende or required to ensure the app is working as expected. In case an app isn't installed, the corresponding link can be found in the "splunkbase_url" column. Alternatively, go to "Apps -&gt; Manage Apps -&gt; Browse for more apps" and look for the title or label of the given app.</description>
   <row>
     <panel>
       <title>Additional apps</title>
@@ -14,6 +14,7 @@
     | table title, label
 | stats values(label) AS label count by title]
 | eval is_installed = if(isnull(count),"false","true")
+| fillnull value="-"
 | table label, title, is_required, is_installed, splunkbase_url</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
