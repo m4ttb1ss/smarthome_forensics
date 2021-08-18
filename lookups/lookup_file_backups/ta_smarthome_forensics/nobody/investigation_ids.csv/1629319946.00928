@@ -2,7 +2,6 @@ source,investigation_case_id,artifact_id,file_hash
 smarthome-details.log.2021-04-11,1234,A13,-
 smarthome-details.log.2021-04-08,1234,A1-11,-
 smarthome-details.log.2021-04-05,0000,A21,-
-events.log,-,-,-
-openhab.log,-,-,-
-wohnung_1_homematic.csv,XY ungelöst,A-9876,86cfec8bb5f51bddce3dfc0a55cd0aa3
-"smarthome-details.log.2021-04-10","-","-","-"
+"events.log","-","-","-"
+"openhab.log","-","-","-"
+"wohnung_1_homematic.csv","-","-","-"
