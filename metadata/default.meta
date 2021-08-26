@@ -128,6 +128,29 @@ owner = nobody
 version = 8.2.1
 modtime = 1629979661.116192000
 
+[props/ets5%3Abus%3Amonitor/FIELDALIAS-ets5_datamodel_smarthome]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1630005438.048378200
+
+[props/amazon%3Aalexa%3AdeviceStateHistory]
+owner = nobody
+version = 8.2.1
+modtime = 1630010608.413441400
+
+[props/amazon%3Aalexa%3AdeviceStateHistory/EVAL-message]
+export = none
+owner = mattbnobodyiss
+version = 8.2.1
+modtime = 1630010935.637906700
+
+[props/amazon%3Aalexa%3AdeviceStateHistory/FIELDALIAS-alexa_devices_to_smarthome]
+export = none
+owner = mattbiss
+version = 8.2.1
+modtime = 1630011720.161247700
+
 ### TRANSFORMS
 
 [transforms]
