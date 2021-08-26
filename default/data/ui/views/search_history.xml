@@ -24,7 +24,7 @@
       <title>Search history</title>
       <table>
         <search>
-          <query>index=_audit action=search search=* NOT user=splunk-system-user app="ta_smarthome_forensics" NOT search_id IN ("*scheduler*") NOT search IN ("*_audit*") info=completed provenance="UI:Dashboard:investigation" search="'| from datamodel Smarthome
+          <query>index=_audit action=search search=* NOT user=splunk-system-user NOT search_id IN ("*scheduler*") NOT search IN ("*_audit*") info=completed provenance="UI:Dashboard:investigation" search="'| from datamodel Smarthome
           | search*" search="*$tokSearch$*" user="*$tokUser$*"
           | where NOT match(search, "^\*$")
 | eval Time = strftime(_time, "%F %T %z")

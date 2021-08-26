@@ -123,11 +123,20 @@ owner = nobody
 version = 8.2.1
 modtime = 1629319536.674475200
 
+[props/ets5%3Abus%3Amonitor]
+owner = nobody
+version = 8.2.1
+modtime = 1629979661.116192000
 
 ### TRANSFORMS
 
 [transforms]
 export = system
+
+[transforms/ta_builder_internal_use_table_format_results_for_ets5_bus_monitor]
+owner = nobody
+version = 8.1.3
+modtime = 1624794661.475560000
 
 [datamodels/Smarthome]
 version = 8.2.1
